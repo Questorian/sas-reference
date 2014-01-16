@@ -1,0 +1,12 @@
+#FJB SASA Notes
+
+##Installation
+
+## General Installation Points
+* Do not install under the general Administrator account on Windows - IE (Internet Explorer) and other tools do not work the same and it is bad practice anyway.
+* Minimal installation version: 9.3
+* Installation source from QNet NAS PACK-DATA: SAS Software Depot
+
+Run setup from network share \\SRV003\SAS and enter following point Order number, and SAS installation key.
+
+

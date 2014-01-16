@@ -1,0 +1,128 @@
+458  data magda (keep=sex age weight);
+459      label
+460          sex = 'Genders'
+461          age = 'Age'
+462      ;
+463
+464      set temp1;
+465
+466  *   if sexo ~= . then do;
+467      if ~(sexo eq ) then do;
+                      -
+                      390
+                      76
+ERROR 390-185: Expecting an relational or arithmetic operator.
+
+ERROR 76-322: Syntax error, statement will be ignored.
+
+468          sex = sexo;
+469          age = idade;
+470          weight = peso;
+471          output;
+472
+473          sex = sexo_1;
+474          age = idade_1;
+475          weight = peso;
+476          output;
+477      end;
+         ---
+         161
+ERROR 161-185: No matching DO/SELECT statement.
+
+478
+479  run;
+
+NOTE: The SAS System stopped processing this step because of errors.
+WARNING: The data set WORK.MAGDA may be incomplete.  When this step was stopped there were 0
+         observations and 3 variables.
+WARNING: Data set WORK.MAGDA was not replaced because this step was stopped.
+NOTE: DATA statement used (Total process time):
+      real time           0.06 seconds
+      cpu time            0.04 seconds
+
+
+480  /*
+481      name: fjb2.sas
+482      use : load and rename variables from input spreadsheet into dataset
+483
+484      date  : 2014-01-09
+485      author: Farley B
+486
+487   */
+488
+489  proc import out=temp1 datafile="c:\tmp\sast-fjb1.xls"
+490      dbms=xls replace;
+491      sheet="folha1";
+492      getnames=yes;
+493
+494      /*
+495  proc datasets;
+496
+497      * map input/output variable names here;
+498
+499      modify fjb1;
+500      rename sexo=sex idade=age peso=weight altura=height;
+501      rename tensaoMax=MaxBP tensaoMin=MinBP;
+502  quit;
+503
+504  */
+505  /*
+506  proc sql;
+507      CREATE TABLE joana AS
+508      SELECT
+509      sexo   AS sex label='Genders',
+510      idade  AS age label='Age',
+511      peso   AS weight label='Weight',
+512      altura AS height label='Height',
+513      tensaoMax AS maxBP label='Max Blood Pressure',
+514      tensaoMin AS minBP label='Min Blood Pressure'
+515      FROM temp1
+516      WHERE sex IS NOT NULL
+517
+518      UNION ALL
+519
+520      SELECT sexo_1,idade_1,peso_1,altura_1,tensaoMax_1,tensaoMin_1
+521      FROM temp1
+522      WHERE sexo_1 IS NOT NULL;
+523
+524      DROP TABLE temp1;
+525  quit;
+526  */
+527
+
+NOTE: The import data set has 225 observations and 12 variables.
+NOTE: WORK.TEMP1 data set was successfully created.
+NOTE: PROCEDURE IMPORT used (Total process time):
+      real time           0.09 seconds
+      cpu time            0.03 seconds
+
+
+528  data magda (keep=sex age weight);
+529      label
+530          sex = 'Genders'
+531          age = 'Age'
+532      ;
+533
+534      set temp1;
+535
+536      if sexo ~= . then do;
+537          sex = sexo;
+538          age = idade;
+539          weight = peso;
+540          output;
+541
+542          sex = sexo_1;
+543          age = idade_1;
+544          weight = peso;
+545          output;
+546      end;
+547
+548  run;
+
+NOTE: There were 225 observations read from the data set WORK.TEMP1.
+NOTE: The data set WORK.MAGDA has 200 observations and 3 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.06 seconds
+      cpu time            0.03 seconds
+
+

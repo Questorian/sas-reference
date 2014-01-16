@@ -1,0 +1,89 @@
+.LOG
+
+•Order number: 99TJ3N 
+•SAS installation key: V6VR-26L1-627M 
+
+http://www2.sas.com/proceedings/sugi27/p056-27.pdf
+http://www.ats.ucla.edu/stat/sas/faq/rwxls8.htm
+http://www.nesug.org/proceedings/nesug06/dm/da05.pdf
+http://www.ats.ucla.edu/stat/sas/library/SASRead_os.htm#ReadingExcelFilesIntoSAS
+
+Download Area for SAS Download Manager for Microsoft® Windows® for x64 
+http://support.sas.com/demosdownloads/downarea_t1.jsp?productID=114453&jmpflag=N
+release date: 2013-11
+download manager: esdclient__94160__wx6__xx__web__1.exe
+always install from software demo:  99TJ3N (BIOTRONIK AG) - keep it offline at installation time
+
+
+We have created the sotware depo - now we must install a local installation from the depo
+SAS9.3
+sid: C:\SAS Software Depot\sid_files\SAS93_99TJ3N_70090909_Win_Wrkstn.txt
+
+post install notes:
+SAS Customer Support Center http://support.sas.com  
+SAS Installed Software and Components report file:///C:\Program Files\SASHome\InstallMisc\InstallLogs\DeploymentRegistry.html  
+SAS Install Center http://support.sas.com/documentation/installcenter/  
+SAS Technical Support http://support.sas.com/techsup  
+Downloads and Hot Fixes http://support.sas.com/techsup/dwnload/  
+SAS Training http://support.sas.com/training  
+Administrative Services http://support.sas.com/adminservices 
+
+ok - now we are installed ! But my NAS is not available
+
+12:59 PM 1/9/2014
+first logon:
+NOTE: Copyright (c) 2002-2010 by SAS Institute Inc., Cary, NC, USA.
+NOTE: SAS (r) Proprietary Software 9.3 (TS1M2)
+      Licensed to BIOTRONIK AG, Site 70090909.
+NOTE: This session is executing on the W32_8PRO  platform.
+
+
+
+NOTE: Enhanced analytical products:
+
+SAS/STAT 12.1
+
+NOTE: SAS initialization used:
+      real time           23.39 seconds
+      cpu time            1.02 seconds
+
+
+set explorer view: view / explorer / work - work library
+
+1:33 PM 1/9/2014
+read xls test:
+http://www.ats.ucla.edu/stat/sas/library/SASRead_os.htm#ReadingExcelFilesIntoSAS
+http://www.ciser.cornell.edu/faq/sas/excel2sas.shtml
+successfully read in spreadsheet
+notes:
+* keywords and sytnax case insensitive
+* whitespace around assignments not relevant
+* if not loading the first worksheet in spreadsheet then you need to speficy 'sheet=""' parameter
+* both types of comments: comment statement (*), and comment stuff (/* ... */) C style comments
+* VIEWTABLE very slow
+
+
+fjb2.sas - rename variables 
+http://stackoverflow.com/questions/18418249/how-to-import-a-csv-file-containing-duplicate-column-names-in-sas
+to rename the variables in a dataset
+
+
+
+
+
+fjb3.sas - create a calculated variable
+
+
+note: loading data directly into SAS (1 per line, define data type, and text width cols, numerics space delimited)
+data zag.weight_club;
+   input IdNumber Name $ 6-20 Team $ 22-27 StartWeight EndWeight;
+   datalines;
+1023 David Shaw      red    189 165
+1049 Amelia Serrano  yellow 145 124
+1219 Alan Nance      red    210 192
+1246 Ravi Sinha      yellow 194 177
+1078 Ashley McKnight red    127 118
+1221 Jim Brown       yellow 220 .
+;
+
+run;
