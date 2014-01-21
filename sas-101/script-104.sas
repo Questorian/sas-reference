@@ -1,17 +1,22 @@
 /* 
-    name: script-104.sas
-    use : load and rename variables from input spreadsheet into dataset using 'proc sql'
+    name  : script-104.sas
+    use   : load and rename variables from input spreadsheet into dataset using 'proc sql'
 
     date  : 2014-01-09
     author: user42
-
  */
 
 
-proc import out=_data_import1 datafile="data-101.xls"
-    dbms=xls replace;
-    sheet="sheet1";
-    getnames=yes;
+
+/*
+ * import: load raw data from input spreadsheet
+ */
+proc import 
+    datafile = "data-101.xls"
+    out      = _data_import1 
+    dbms     = xls replace;
+    sheet    = "sheet1";
+    getnames = yes;
 quit;
 
 
@@ -71,4 +76,11 @@ data  Sample_Set2 (keep=sex age weight);
 run;
 
 
+/*
+ * clean-up: remove temporary data-staging tables
+ */
+proc sql;
 
+    DROP TABLE _data_import1;
+
+quit;
