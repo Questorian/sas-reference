@@ -7,6 +7,7 @@
 
     notes: 
     * Tools / Options / Change current folder to 'sas-101' to find data XLS
+    * add working directory to your explorer "favorites"
 
  */
 

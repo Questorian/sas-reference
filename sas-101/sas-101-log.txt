@@ -87,3 +87,8 @@ data zag.weight_club;
 ;
 
 run;
+
+02:07 2014-01-22
+setup tips:
+http://rfd.uoregon.edu/files/rfd/StatisticalResources/015system.txt
+

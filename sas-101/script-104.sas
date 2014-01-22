@@ -22,7 +22,8 @@ quit;
 
 
 
-proc sql;
+proc sql
+
     CREATE TABLE 
         Sample_Set1 
     AS
@@ -81,6 +82,6 @@ run;
  */
 proc sql;
 
-    DROP TABLE _data_import1;
+    * DROP TABLE _data_import1;
 
 quit;
