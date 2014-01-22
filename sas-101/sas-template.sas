@@ -19,10 +19,11 @@ libname MyStuff "C:\tmp\SAS\";
 /***********************************************/
 /*******           data INPUT            *******/
 /***********************************************/
-/* loading data directly into SAS with the data statement */
+/* loading data inline into SAS with the DATA INPUT statement */
 data <SAS target data set name>;
-    input <space separated variable names for each row>;
-    * cards is a keyword - beware! ;
+    input 
+        <space separated variable names for each row>;
+    * cards/datalines - are keywords and they are synonyms (from punched cards) ;
     cards;
     <row1 data, space separated values, ...>
     <row2 data, space separated values, ...>
@@ -32,13 +33,20 @@ run;
 /*
     sample - data input
 
-data _test_direct_load_data;
-    input x y z;
+data new_patients;
+    input 
+        id age height weight;
     cards;
-    1 2 3
-    7 8 9
+    1 45 1.60 99
+    2 44 1.70 89
+    3 37 1.67 92
+    4 54 1.54 78
+    5 23 1.74 72
+    6 34 1.82 76
+    7 66 1.84 74
     ;
 run;
+
 
 */
 
@@ -119,7 +127,8 @@ run;
  ===========
 
 observations        rows - each row is an observation in SAS
-variable            column - equivalent to a SQL column name
+variable            column - equivalent to a SQL column name (8 characters max - use labels for more)
 data set            SAS target table for holding data. Underscores valid, hyphese are not for naming
+labels              SAS extended variable data and descriptions. Probably because vars are too short
 
 */
