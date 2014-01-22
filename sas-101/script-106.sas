@@ -5,7 +5,6 @@
  * 
  *  Project: \__UNDEFINED
  *  Updated: 2014-01-22, (Created: 2014-01-22)
- *  Author : Farley Balasuriya (developer@QuestorSystems.com)
  *  Type   : SAS Script
  * -------------------------------------------------------------------------
  *  2014-01-22T19:56:33 - CLI003 - cli003\user42 - 

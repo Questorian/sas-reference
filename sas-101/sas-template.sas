@@ -3,36 +3,53 @@
  */
 
 
-/* BOILERPLATE: libname */
+/* libname */
 
 libname <new libname> "<filesystem path to folder to contain new lib with trailing slash>";
 
 /* 
-    libname FJB "C:\tmp\SAS\";
+    sample - libname
+
+libname MyStuff "C:\tmp\SAS\";
+
 */
 
 
 
 /***********************************************/
-/*******             data                *******/
+/*******           data INPUT            *******/
 /***********************************************/
 /* loading data directly into SAS with the data statement */
-data <SAS data set name to store the loaded data into>;
+data <SAS target data set name>;
     input <space separated variable names for each row>;
+    * cards is a keyword - beware! ;
     cards;
     <row1 data, space separated values, ...>
     <row2 data, space separated values, ...>
     ;
 run;
 
+/*
+    sample - data input
+
+data _test_direct_load_data;
+    input x y z;
+    cards;
+    1 2 3
+    7 8 9
+    ;
+run;
+
+*/
+
 
 
 /***********************************************/
-/*******           infile                *******/
+/*******           data INFILE           *******/
 /***********************************************/
 
 /* text file with or without delimeters */
-data <SAS data set name>;
+data <SAS target data set name>;
     infile   "<input data file path including file extension>"
     LRECL    = <a logical lenght of your data to encompass ENTIRE data record - ie row length> 
     DLM      = ',' 
@@ -43,7 +60,7 @@ input
 run;
 
 /* 
-    sample datafile - infile_test.txt:
+    sample - data infile: infile_test.txt:
 
 x y z
 1 2 3
@@ -67,9 +84,6 @@ run;
 
 
 
-
-
-
 /***********************************************/
 /*******           proc import           *******/
 /***********************************************/
@@ -79,29 +93,33 @@ proc import
     datafile = "<filesystem path to Excel spreadsheet, including .xls extension"
     out      = <library.table data set name within SAS>
     dbms     = xls replace;
-    * proc options ... ;
+    * proc options (each with own semicolon) ... ;
     sheet    = "<EXCEL worksheet name - normaly sheet1 in en_US language>";
     getnames = <yes|no -- pull-in first row XLS column names and map to SAS variable names?>;
+    mixed    = <yes|no -- refers to datatypes being loaded - are they numeric and character?>;
+    scantime = <yes|no -- read in time formated data as long as variable not date format?>;
 run;
 
 /*
-    proc import
-        datafile = "data-101.xls"
-        out      = _data_101
-        dbms     = xls replace;
-        sheet    = "sheet1";
-        getnames = yes;
-    run;
+    sample - proc import
+
+proc import
+    datafile = "data-101.xls"
+    out      = _data_101
+    dbms     = xls replace;
+    sheet    = "sheet1";
+    getnames = yes;
+run;
 */
 
 
 
 /*
- SAS-Talk
- ========
+ SAS Lexicon
+ ===========
 
 observations        rows - each row is an observation in SAS
 variable            column - equivalent to a SQL column name
-
+data set            SAS target table for holding data. Underscores valid, hyphese are not for naming
 
 */
