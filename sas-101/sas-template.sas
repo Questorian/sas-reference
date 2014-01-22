@@ -98,11 +98,11 @@ run;
 
 /* Excel file type */
 proc import
-    datafile = "<filesystem path to Excel spreadsheet, including .xls extension"
+    datafile = "<filesystem path to Excel spreadsheet, including .xls extension>"
     out      = <library.table data set name within SAS>
     dbms     = xls replace;
     * proc options (each with own semicolon) ... ;
-    sheet    = "<EXCEL worksheet name - normaly sheet1 in en_US language>";
+    sheet    = "<EXCEL worksheet name - normaly Sheet1 in en_US language>";
     getnames = <yes|no -- pull-in first row XLS column names and map to SAS variable names?>;
     mixed    = <yes|no -- refers to datatypes being loaded - are they numeric and character?>;
     scantime = <yes|no -- read in time formated data as long as variable not date format?>;
