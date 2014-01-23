@@ -2,19 +2,6 @@
  * FJB SAS Template
  */
 
-/*
- * simplest possible SAS program
- */
-data main;
-    x = 1;
-run;
-
-* note: we force 'proc print' to use the 'main' data set;
-* this is a useful trick for testing lots of data sets at once;
-proc print data=main;
-quit;
-
-
 
 /* libname */
 libname 
@@ -29,64 +16,26 @@ libname
 */
 
 
+/***********************************************/
+/*******           SAS DATA INPUT        *******/
+/***********************************************/
+* getting data into any system is important;
 
 /***********************************************/
-/*******           proc SQL              *******/
+/*******       simplest possible DATA    *******/
 /***********************************************/
-* SQL statements have semicolon after the proc statement;
-* SQL proc options go before the semicolon (if any required);
-* UNION ALL - is a good trick for reading "doubled-up" data;
-* SQL statements end with a quit, and not a 'run'
-* there can be many SQL statements in the 'proc sql' call, separated by semicolons;
-* use DROP TABLE <libref.data set name> to remove data sets if required;
-proc sql;
+/*
+ * simplest possible SAS program
+ */
+data main;
+    x = 1;
+run;
 
-    CREATE TABLE 
-        <tablename - SAS data set name>
-    AS
-
-    SELECT
-        <var AS newvar label='label text for this variable'>,
-    FROM
-        <SAS data set>
-    WHERE
-        <WHERE clause if required>
-    ;
-
-quit;
- 
-
-proc sql;
-
-    CREATE TABLE 
-        <tablename - SAS data set name>
-    AS
-
-    SELECT
-        <var AS newvar label='label text for this variable'>,
-    FROM
-        <SAS data set>
-    WHERE
-        <WHERE clause if required>
-
-    UNION ALL
-
-    SELECT
-        <var AS newvar label='label text for this variable'>,
-    FROM
-        <SAS data set>
-    WHERE
-        <WHERE clause if required>;
-        
-
+* note: we force 'proc print' to use the 'main' data set;
+* this is a useful trick for testing lots of data sets at once;
+proc print data=main;
 quit;
 
-proc sql;
-
-    DROP TABLE <data set name1>;
-    DROP TABLE <data set name2>;
-
-quit;
 
 
 /***********************************************/
@@ -164,7 +113,6 @@ run;
 */
 
 
-
 /***********************************************/
 /*******           proc import           *******/
 /***********************************************/
@@ -194,6 +142,71 @@ run;
 */
 
 
+/***********************************************/
+/*******           proc SQL              *******/
+/***********************************************/
+* 'proc sql' statements have semicolon after the proc statement;
+* SQL proc options go before the semicolon (if required);
+* UNION ALL - is a trick for reading "doubled-up" data;
+* SQL statements end with a quit, and not a 'run'
+* there can be many SQL statements in the 'proc sql' call, separated by semicolons;
+* use DROP TABLE <libref.data set name> to remove data sets if required;
+* note: by convention we capitalise SQL keywords in a query: SELECT, INSERT, ...;
+* note: the main keywords are all indented to the start of the line;w
+
+* standard single SQL query within a proc sql statement;
+proc sql;
+
+    CREATE TABLE 
+        <tablename - SAS data set name>
+    AS
+
+    SELECT
+        <var AS newvar label='label text for this variable'>,
+    FROM
+        <SAS data set>
+    WHERE
+        <WHERE clause if required>
+    ;
+
+quit;
+ 
+* SQL UNION ALL statement - good for "doubled-up" data;
+proc sql;
+
+    CREATE TABLE 
+        <tablename - SAS data set name>
+    AS
+
+    SELECT
+        <var AS newvar label='label text for this variable'>,
+    FROM
+        <SAS data set>
+    WHERE
+        <WHERE clause if required>
+
+    UNION ALL
+
+    SELECT
+        <var AS newvar label='label text for this variable'>,
+    FROM
+        <SAS data set>
+    WHERE
+        <WHERE clause if required>;
+        
+
+quit;
+
+* tidy-up routine using SQL to DROP the TABLEs (data sets) when finished;
+proc sql;
+
+    DROP TABLE <data set name1>;
+    DROP TABLE <data set name2>;
+
+quit;
+
+
+
 
 /*
  SAS Lexicon
@@ -203,5 +216,6 @@ observations        rows - each row is an observation in SAS
 variable            column - equivalent to a SQL column name (8 characters max - use labels for more)
 data set            SAS target table for holding data. Underscores valid, hyphese are not for naming
 labels              SAS extended variable data and descriptions. Probably because vars are too short
+library             SAS logical location for a physical data source - file, directory, ODBC source, HTML, XML, etc...
 
 */
