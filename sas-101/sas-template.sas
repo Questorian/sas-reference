@@ -2,18 +2,91 @@
  * FJB SAS Template
  */
 
+/*
+ * simplest possible SAS program
+ */
+data main;
+    x = 1;
+run;
+
+* note: we force 'proc print' to use the 'main' data set;
+* this is a useful trick for testing lots of data sets at once;
+proc print data=main;
+quit;
+
+
 
 /* libname */
-
-libname <new libname> "<filesystem path to folder to contain new lib with trailing slash>";
+libname 
+    <new libname>   "<filesystem path to folder to contain new lib with trailing slash>";
 
 /* 
     sample - libname
 
-libname MyStuff "C:\tmp\SAS\";
+libname 
+    MyStuff     "C:\tmp\SAS\";
 
 */
 
+
+
+/***********************************************/
+/*******           proc SQL              *******/
+/***********************************************/
+* SQL statements have semicolon after the proc statement;
+* SQL proc options go before the semicolon (if any required);
+* UNION ALL - is a good trick for reading "doubled-up" data;
+* SQL statements end with a quit, and not a 'run'
+* there can be many SQL statements in the 'proc sql' call, separated by semicolons;
+* use DROP TABLE <libref.data set name> to remove data sets if required;
+proc sql;
+
+    CREATE TABLE 
+        <tablename - SAS data set name>
+    AS
+
+    SELECT
+        <var AS newvar label='label text for this variable'>,
+    FROM
+        <SAS data set>
+    WHERE
+        <WHERE clause if required>
+    ;
+
+quit;
+ 
+
+proc sql;
+
+    CREATE TABLE 
+        <tablename - SAS data set name>
+    AS
+
+    SELECT
+        <var AS newvar label='label text for this variable'>,
+    FROM
+        <SAS data set>
+    WHERE
+        <WHERE clause if required>
+
+    UNION ALL
+
+    SELECT
+        <var AS newvar label='label text for this variable'>,
+    FROM
+        <SAS data set>
+    WHERE
+        <WHERE clause if required>;
+        
+
+quit;
+
+proc sql;
+
+    DROP TABLE <data set name1>;
+    DROP TABLE <data set name2>;
+
+quit;
 
 
 /***********************************************/

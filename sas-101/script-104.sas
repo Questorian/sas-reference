@@ -22,7 +22,7 @@ quit;
 
 
 
-proc sql
+proc sql;
 
     CREATE TABLE 
         Sample_Set1 
