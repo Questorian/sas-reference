@@ -38,6 +38,8 @@ foreach my $file (<*.xls>) {
 
 genproc_cleanup(@filelist);	
 
+gen_test(60);
+
 sub gen_library
 {
     my $library = shift;
@@ -120,6 +122,26 @@ run;
 EOF_IMPORT
 
 }
+
+sub gen_test
+{
+    my $count = shift || 1;
+
+    print "data main;\n";
+    foreach my $i (1 .. $count){
+        print "    var$i = $i;\n";
+    }
+
+    print << "EOF_TEST"
+run;
+
+proc print data=main;
+quit;
+
+EOF_TEST
+;
+}
+
 __END__
 
 =pod
